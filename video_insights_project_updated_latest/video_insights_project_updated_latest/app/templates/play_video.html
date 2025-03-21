@@ -1,0 +1,45 @@
+{% extends 'base_userapp.html' %}
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-dark text-white text-center" style="font-size: 1.5rem;">
+            Play Video: "{{ video.title }}"
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="embed-responsive embed-responsive-16by9 col-6 mx-auto">
+                    <video controls style="width:100%;">
+                        <source src="{{ MEDIA_URL }}videos/{{ video.file_name }}" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+
+                <!-- Transcript segments -->
+                {% if video.segments.all %}
+                <div class="col-6">
+                    <h5 class="mt-4 text-center">Transcript Segments</h5>
+                    <ul class="list-group mt-3">
+                        {% for segment in video.segments.all %}
+                        <li class="list-group-item">
+                            <span class="badge badge-secondary mr-2">
+                                {{ segment.start_time|floatformat:1 }}s - {{ segment.end_time|floatformat:1 }}s
+                            </span>
+                            {{ segment.text }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="mt-4 text-center text-muted">No transcript segments available.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'detection_history' %}" class="btn btn-outline-secondary">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

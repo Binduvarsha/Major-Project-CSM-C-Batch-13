@@ -1,0 +1,171 @@
+{% extends 'base_userapp.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <h1>{{ video.title }}</h1>
+  <p><strong>Description:</strong> {{ video.description }}</p>
+  <p><strong>Source:</strong> {{ video.source }}</p>
+
+  <!-- Video Player -->
+  <div class="mb-4">
+    <video id="videoPlayer" width="50%" controls>
+      <source src="{{ MEDIA_URL }}videos/{{ video.file_name }}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <h4>Audio File</h4>
+  <div class="mb-4">
+    <audio id="audioPlayer" controls>
+      <source src="{{ MEDIA_URL }}videos/{{ video.file_name|slice:":-4" }}.wav" type="audio/wav" />
+      Your browser does not support the audio tag.
+    </audio>
+  </div>
+
+  <!-- Full Transcript -->
+  <h2>Full Transcript</h2>
+  <p id="transcript">{{ video.transcript }}</p>
+
+  <!-- Action Buttons -->
+  <div class="mt-4">
+    <select id="languageSelector" style="padding: 10px; font-size: 16px; border: 2px solid #ccc; border-radius: 5px; background-color: #f9f9f9; color: #333; width: 200px; cursor: pointer; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)">
+      <option value="en" style="padding: 8px; background-color: #f9f9f9">English</option>
+      <option value="hi" style="padding: 8px; background-color: #f9f9f9">Hindi</option>
+      <option value="te" style="padding: 8px; background-color: #f9f9f9">Telugu</option>
+      <option value="ta" style="padding: 8px; background-color: #f9f9f9">Tamil</option>
+      <option value="kn" style="padding: 8px; background-color: #f9f9f9">Kannada</option>
+      <option value="es" style="padding: 8px; background-color: #f9f9f9">Spanish</option>
+      <option value="it" style="padding: 8px; background-color: #f9f9f9">Italian</option>
+      <option value="fr" style="padding: 8px; background-color: #f9f9f9">French</option>
+    </select>
+
+    <button id="translateButton" class="btn btn-dark">Translate</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#translateButton").click(function () {
+          const transcript = $("#transcript").text();
+          const language = $("#languageSelector").val();
+
+          $.ajax({
+            url: "{% url 'translate_text' %}",
+            type: "POST",
+            data: {
+              transcript: transcript,
+              language: language,
+              csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function (response) {
+              $("#transcript").text(response.translated_text);
+            },
+            error: function (xhr) {
+              alert("Error translating text: " + xhr.responseJSON.error);
+            },
+          });
+        });
+      });
+    </script>
+    <button class="btn btn-primary" onclick="detectThemes()">Detect Themes</button>
+    <button class="btn btn-success" onclick="askQuestion()">Ask a Question</button>
+    <button class="btn btn-info" onclick="summarizeText()">Summarize Text</button>
+  </div>
+
+  <!-- Output Section -->
+  <div id="output" class="mt-4"></div>
+
+  <!-- Segmented Transcript with Timestamps -->
+  <h2>Segmented Transcript with Timestamps</h2>
+  <ul>
+    {% for segment in video.segments.all %}
+    <li>
+      <a href="javascript:void(0);" class="timestamp-link" onclick="seekTo({{ segment.start_time|floatformat:2 }})">
+        {{ segment.start_time|floatformat:2 }}s - {{ segment.end_time|floatformat:2 }}s:
+      </a>
+      {{ segment.text }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- JavaScript Functions -->
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function seekTo(time) {
+    const video = document.getElementById("videoPlayer");
+    if (video) {
+      console.log(`Seeking to time: ${time}`);
+      video.currentTime = parseFloat(time);
+      video.play();
+    } else {
+      console.error("Video player not found!");
+    }
+  }
+
+  async function detectThemes() {
+    const transcript = document.getElementById("transcript").innerText;
+    const csrftoken = getCookie("csrftoken"); // Retrieve CSRF token
+
+    const response = await fetch("/api/detect-themes/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken, // Include CSRF token in headers
+      },
+      body: JSON.stringify({ text: transcript }),
+    });
+    const data = await response.json();
+    document.getElementById("output").innerHTML = `<h4>Themes Detected:</h4><p>${data.result}</p>`;
+  }
+
+  async function askQuestion() {
+    const transcript = document.getElementById("transcript").innerText;
+    const question = prompt("Enter your question:");
+    if (!question) return;
+
+    const csrftoken = getCookie("csrftoken"); // Retrieve CSRF token
+
+    const response = await fetch("/api/ask-question/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken, // Include CSRF token in headers
+      },
+      body: JSON.stringify({ text: transcript, question }),
+    });
+    const data = await response.json();
+    document.getElementById("output").innerHTML = `<h4>Answer:</h4><p>${data.result}</p>`;
+  }
+
+  async function summarizeText() {
+    const transcript = document.getElementById("transcript").innerText;
+    const csrftoken = getCookie("csrftoken"); // Retrieve CSRF token
+
+    const response = await fetch("/api/summarize-text/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken, // Include CSRF token in headers
+      },
+      body: JSON.stringify({ text: transcript }),
+    });
+    const data = await response.json();
+    document.getElementById("output").innerHTML = `<h4>Summary:</h4><p>${data.result}</p>`;
+  }
+</script>
+{% endblock %}
