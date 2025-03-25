@@ -1,0 +1,24 @@
+{% extends 'base_userapp.html' %}
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-header bg-primary text-white text-center" style="font-size: 1.5rem;">
+      Play Audio: "{{ video.title }}"
+    </div>
+    <div class="card-body">
+     
+      <div class="d-flex justify-content-center">
+        <audio controls style="width:90%;">
+          <source src="{{ MEDIA_URL }}videos/{{ video.file_name|cut:'.mp4' }}.wav" type="audio/wav">
+          Your browser does not support HTML5 audio.
+        </audio>
+      </div>
+      <div class="text-center mt-3">
+        <a href="{% url 'detection_history' %}" class="btn btn-outline-secondary">Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
