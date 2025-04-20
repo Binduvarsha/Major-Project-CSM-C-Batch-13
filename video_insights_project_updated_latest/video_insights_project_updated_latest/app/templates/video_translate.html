@@ -1,0 +1,42 @@
+{% extends 'base_userapp.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Translate Transcript for "{{ video.title }}"</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Original Transcript</h5>
+            <p class="card-text">{{ video.transcript|linebreaks }}</p>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="target_language">Select Language:</label>
+                    <select class="form-control" id="target_language" name="target_language">
+                        <option value="">-- Select Language --</option>
+                        <option value="Hindi" {% if selected_language == "Hindi" %}selected{% endif %}>Hindi</option>
+                        <option value="Telugu" {% if selected_language == "Telugu" %}selected{% endif %}>Telugu</option>
+                        <option value="Tamil" {% if selected_language == "Tamil" %}selected{% endif %}>Tamil</option>
+                        <option value="Kannada" {% if selected_language == "Kannada" %}selected{% endif %}>Kannada</option>
+                        <option value="Malayalam" {% if selected_language == "Malayalam" %}selected{% endif %}>Malayalam</option>
+                        <option value="Punjabi" {% if selected_language == "Punjabi" %}selected{% endif %}>Punjabi</option>
+                        <option value="Gujarati" {% if selected_language == "Gujarati" %}selected{% endif %}>Gujarati</option>
+                        <option value="Marathi" {% if selected_language == "Marathi" %}selected{% endif %}>Marathi</option>
+                        <option value="English" {% if selected_language == "English" %}selected{% endif %}>English</option>
+                        <option value="Spanish" {% if selected_language == "Spanish" %}selected{% endif %}>Spanish</option>
+                        <option value="German" {% if selected_language == "German" %}selected{% endif %}>German</option>
+                        <option value="Italian" {% if selected_language == "Italian" %}selected{% endif %}>Italian</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Translate</button>
+                <a href="{% url 'detection_history' %}" class="btn btn-secondary">Back</a>
+            </form>
+            {% if translated_text %}
+            <hr>
+            <h5>Translated Transcript ({{ selected_language }})</h5>
+            <p id="translatedText">{{ translated_text|linebreaks }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

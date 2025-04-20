@@ -1,0 +1,126 @@
+{% extends 'base_userapp.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <div class="row gx-3 h-100">
+          <div class="col-6 align-self-start wow fadeInUp" data-wow-delay="0.1s">
+            <img class="img-fluid" src="{% static 'img/insit.jpg' %}" alt="Video Insight Image" />
+          </div>
+          <div class="col-6 align-self-end wow fadeInDown" data-wow-delay="0.1s">
+            <img class="img-fluid" src="{% static 'img/28img4.avif' %}" alt="Timestamp Summarization" />
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+        <p class="fw-medium text-uppercase text-primary mb-2">About Our Project</p>
+        <h1 class="display-5 mb-4">Leading the Way in Video Insights Detection and Summarization</h1>
+        <p class="mb-4">Our innovative platform analyzes YouTube and Drive videos to provide timestamped summaries and generate insightful overviews. Experience multilingual support to cater to diverse audiences worldwide.</p>
+        <div class="d-flex align-items-center mb-4">
+          <div class="flex-shrink-0 bg-primary p-4">
+            <h1 class="display-2">VIS</h1>
+            <h5 class="text-white">Video Insight</h5>
+            <h5 class="text-white">Summarization</h5>
+          </div>
+          <div class="ms-4">
+            <p><i class="fa fa-check text-primary me-2"></i>Timestamp-based Video Summaries</p>
+            <p><i class="fa fa-check text-primary me-2"></i>Multilingual Video Transcription Support</p>
+            <p><i class="fa fa-check text-primary me-2"></i>Comprehensive Insights Generation</p>
+            <p><i class="fa fa-check text-primary me-2"></i>AI-powered Speech-to-Text Conversion</p>
+            <p class="mb-0"><i class="fa fa-check text-primary me-2"></i>Multilingual Translation for Global Audiences</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid facts my-5 p-5">
+  <div class="row g-5">
+    <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.1s">
+      <div class="text-center border p-5">
+        <i class="fa fa-video fa-3x text-white mb-3"></i>
+        <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">1000</h1>
+        <span class="fs-5 fw-semi-bold text-white">Videos Analyzed</span>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.3s">
+      <div class="text-center border p-5">
+        <i class="fa fa-language fa-3x text-white mb-3"></i>
+        <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">15</h1>
+        <span class="fs-5 fw-semi-bold text-white">Languages Supported</span>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.5s">
+      <div class="text-center border p-5">
+        <i class="fa fa-clock fa-3x text-white mb-3"></i>
+        <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">200</h1>
+        <span class="fs-5 fw-semi-bold text-white">Hours of Video Summarized</span>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.7s">
+      <div class="text-center border p-5">
+        <i class="fa fa-bullseye fa-3x text-white mb-3"></i>
+        <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">98%</h1>
+        <span class="fs-5 fw-semi-bold text-white">Accuracy of Video Insights</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="position-relative me-lg-4">
+          <img class="img-fluid w-100" src="{% static 'img/28im2.avif' %}" alt="Video Features" />
+        </div>
+      </div>
+      <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+        <p class="fw-medium text-uppercase text-primary mb-2">Why Choose Us!</p>
+        <h1 class="display-5 mb-4">Reasons to Choose Our Video Insights Detection Platform</h1>
+        <p class="mb-4">Our platform helps users get quick and accurate video insights with timestamped summaries, AI-powered transcription, and multilingual support to make videos accessible to a global audience.</p>
+        <div class="row gy-4">
+          <div class="col-12">
+            <div class="d-flex">
+              <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                <i class="fa fa-check text-white"></i>
+              </div>
+              <div class="ms-4">
+                <h4>Instant Video Summarization</h4>
+                <span>Get timestamp-based summaries for any YouTube or Drive video in seconds.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex">
+              <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                <i class="fa fa-check text-white"></i>
+              </div>
+              <div class="ms-4">
+                <h4>Multilingual Video Transcription</h4>
+                <span>Support for multiple languages, ensuring global reach for your video content.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex">
+              <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                <i class="fa fa-check text-white"></i>
+              </div>
+              <div class="ms-4">
+                <h4>AI-powered Insights</h4>
+                <span>Advanced AI models generate deep insights and highlight key moments in videos.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

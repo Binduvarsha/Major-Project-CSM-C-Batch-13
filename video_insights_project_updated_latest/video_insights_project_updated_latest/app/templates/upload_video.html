@@ -1,0 +1,84 @@
+{% extends 'base_userapp.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="max-width: 1200px; margin-top: 50px;">
+    <div class="row align-items-center">
+        <!-- Form Column (8 columns) -->
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <!-- Card Header with Gradient Background -->
+                <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #007bff, #6610f2); padding: 20px; border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
+                    <h3 style="margin: 0; font-weight: 700;">Upload Video for Transcription</h3>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" style="background-color: #f8f9fa; padding: 30px;">
+                    <form method="post" enctype="multipart/form-data" id="videoForm">
+                        {% csrf_token %}
+                        <!-- Row 1: Video Title and Video URL -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="title" class="form-label fw-bold" style="font-size: 16px;">Video Title</label>
+                                <input type="text" name="title" id="title" maxlength="255" class="form-control" placeholder="Enter video title" style="padding: 10px; font-size: 16px;">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="url" class="form-label fw-bold" style="font-size: 16px;">Video URL</label>
+                                <input type="url" name="url" id="url" class="form-control" placeholder="Enter video URL (optional)" style="padding: 10px; font-size: 16px;">
+                            </div>
+                        </div>
+                        <!-- Row 2: Video Description and Video File -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="description" class="form-label fw-bold" style="font-size: 16px;">Video Description</label>
+                                <textarea name="description" id="description" rows="1" class="form-control" placeholder="Enter video description" style="padding: 10px; font-size: 16px;"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="video_file" class="form-label fw-bold" style="font-size: 16px;">Upload Video File</label>
+                                <input type="file" name="video_file" id="video_file" class="form-control" style="padding: 10px; font-size: 16px;">
+                            </div>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100" style="font-size: 18px; font-weight: 600; padding: 12px;">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                
+                    <!-- Loading Message -->
+                    <div id="loadingMessage" class="text-center mt-3" style="display: none;">
+                        <strong>Please wait while loading...</strong>
+                    </div>
+                </div>
+                
+                <script>
+                    // Handle form submission
+                    document.getElementById('videoForm').addEventListener('submit', function(event) {
+                        // Prevent the default form submission
+                        event.preventDefault();
+                        
+                        // Hide the submit button to prevent multiple submissions
+                        document.querySelector('button[type="submit"]').disabled = true;
+                        
+                        // Show the loading message
+                        document.getElementById('loadingMessage').style.display = 'block';
+                
+                        // Simulate a delay (for demonstration purposes)
+                        setTimeout(function() {
+                            // Submit the form after the simulated delay
+                            event.target.submit();
+                        }, 2000); // Adjust the time to match your actual form processing
+                    });
+                </script>
+                
+            </div>
+        </div>
+        <!-- Image Column (4 columns) -->
+        <div class="col-md-4 d-none d-md-block">
+            <div class="text-center">
+                <!-- Replace with your own image path -->
+                <img src="https://img.freepik.com/free-vector/content-creator-concept-illustration_114360-3881.jpg?ga=GA1.1.1578528612.1741966316&semt=ais_hybrid" alt="Upload Illustration" class="img-fluid rounded shadow-lg" style="max-height: 500px; object-fit: cover;">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
