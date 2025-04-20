@@ -1,0 +1,24 @@
+{% extends 'base_userapp.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Summarize Transcript for "{{ video.title }}"</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Full Transcript</h5>
+            <p class="card-text">{{ video.transcript|linebreaks }}</p>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Summarize Text</button>
+                <a href="{% url 'detection_history' %}" class="btn btn-secondary">Back</a>
+            </form>
+            {% if summary %}
+            <hr>
+            <h5>Summary</h5>
+            <p>{{ summary|linebreaks }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

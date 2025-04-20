@@ -1,0 +1,95 @@
+{% extends 'base_userapp.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="row gx-3 h-100">
+                    <div class="col-6 align-self-start wow fadeInUp" data-wow-delay="0.1s">
+                      <img class="img-fluid" src="{% static 'img/insit.jpg' %}" alt="Video Insight Image" />
+                    </div>
+                    <div class="col-6 align-self-end wow fadeInDown" data-wow-delay="0.1s">
+                      <img class="img-fluid" src="{% static 'img/28img4.avif' %}" alt="Timestamp Summarization" />
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <p class="fw-medium text-uppercase text-primary mb-2">About Our Platform</p>
+                <h1 class="display-5 mb-4">Innovative Video Analysis & Summarization Platform</h1>
+                <p class="mb-4">Experience cutting-edge technology that detects and analyzes videos from platforms like YouTube and Google Drive. Our solution generates accurate time-stamped summaries and supports multiple languages, making video content easier to understand and navigate.</p>
+                <div class="d-flex align-items-center mb-4">
+                    <div class="flex-shrink-0 bg-primary p-4">
+                        <h1 class="display-2">VID</h1>
+                        <h5 class="text-white">Intelligent</h5>
+                        <h5 class="text-white">Video Analysis</h5>
+                    </div>
+                    <div class="ms-4">
+                        <p><i class="fa fa-check text-primary me-2"></i>Supports multiple sources like YouTube, Google Drive and Dropbox</p>
+                        <p><i class="fa fa-check text-primary me-2"></i>Automatic Time-Stamped Summaries</p>
+                        <p><i class="fa fa-check text-primary me-2"></i>Multilingual Support for Global Reach</p>
+                        <p><i class="fa fa-check text-primary me-2"></i>Accurate and Fast Video Analytics</p>
+                        <p class="mb-0"><i class="fa fa-check text-primary me-2"></i>Enhanced User Experience with Summarized Content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="position-relative me-lg-4">
+                    <img class="img-fluid w-100" src="{% static 'img/insit.jpg' %}" alt="Video Features" />
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                <p class="fw-medium text-uppercase text-primary mb-2">Why Choose Us!</p>
+                <h1 class="display-5 mb-4">Key Features of Our Video InSights Generation Platform</h1>
+                <p class="mb-4">Discover why our platform is the best choice for analyzing, summarizing, and translating video content. We provide accurate, time-stamped summaries for videos in multiple languages.</p>
+                <div class="row gy-4">
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                <i class="fa fa-check text-white"></i>
+                            </div>
+                            <div class="ms-4">
+                                <h4>Seamless Video Analysis</h4>
+                                <span>Support videos from mutliple sources effortlessly.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                <i class="fa fa-check text-white"></i>
+                            </div>
+                            <div class="ms-4">
+                                <h4>Instant Time-Stamp Summaries</h4>
+                                <span>Get precise time-stamped summaries of video content, making it easy to navigate and understand.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                <i class="fa fa-check text-white"></i>
+                            </div>
+                            <div class="ms-4">
+                                <h4>Multi-Language Support</h4>
+                                <span>Support for over 20 languages to make your video content accessible globally.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
