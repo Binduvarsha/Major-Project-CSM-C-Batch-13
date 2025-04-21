@@ -84,9 +84,9 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LIC
 
 
 Commands to run:
-cd myproject
+cd Python-3.10.9/myproject
 source venv/bin/activate
-cd AI-Based-Video-Insights-Generator-VVIT/video_insights_project_updated_latest
+cd Video-Insights-Deployement
 authbind --deep python manage.py runserver 0.0.0.0:80
 
-Deployed URL: http://3.108.64.172/
+Deployed URL: http://54.166.182.149/
