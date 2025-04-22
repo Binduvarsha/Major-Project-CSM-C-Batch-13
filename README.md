@@ -89,4 +89,4 @@ source venv/bin/activate
 cd Video-Insights-Deployement
 authbind --deep python manage.py runserver 0.0.0.0:80
 
-Deployed URL: http://54.166.182.149/
+Deployed URL: http://44.203.171.5/
